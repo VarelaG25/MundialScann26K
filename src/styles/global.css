@@ -1,0 +1,24 @@
+@import 'tailwindcss';
+
+.oswald-light {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 300;
+}
+
+.oswald-normal {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 400;
+}
+
+.oswald-bold {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+}
+
+.titles {
+  @apply text-4xl font-bold;
+}
+
+.vnab-bar {
+  @apply bg-gray-800 text-white p-4 flex items-center gap-4;
+}
