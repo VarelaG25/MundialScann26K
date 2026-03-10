@@ -1,9 +1,11 @@
 <template>
-  <div class="ar-wrapper border-2 border-dashed border-gray-400 rounded-lg overflow-hidden">
+  <div v-if="modelValue" class="ar-wrapper">
     <a-scene
       embedded
+      vr-mode-ui="enabled: false"
+      device-orientation-permission-ui="enabled: false"
       arjs="sourceType: webcam; debugUIEnabled: false; trackingMethod: best;"
-      renderer="antialias: true; colorManagement: true; sortObjects: true;"
+      renderer="antialias: true; alpha: true"
     >
       <a-assets timeout="10000">
         <a-asset-item id="eagleModel" src="/models/eagle.glb"></a-asset-item>
@@ -14,30 +16,65 @@
           gltf-model="#eagleModel"
           scale="0.5 0.5 0.5"
           position="0 0 0"
-          rotation="0 0 0"
           animation="property: rotation; to: 0 360 0; loop: true; dur: 10000"
-        ></a-entity>
+        />
       </a-marker>
 
-      <a-entity camera></a-entity>
+      <a-entity camera />
     </a-scene>
+
+    <button class="close-btn" @click="emit('update:modelValue', false)">✕</button>
   </div>
 </template>
 
+<script setup lang="ts">
+  const props = defineProps<{
+    modelValue: boolean
+  }>()
+
+  const emit = defineEmits(['update:modelValue'])
+</script>
+
 <style scoped>
   .ar-wrapper {
-    width: 100%;
-    height: 500px; /* Altura fija para que conviva con tu NavBar */
-    position: relative;
-    background-color: #000;
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    background: black;
   }
 
-  /* AR.js suele crear un canvas hermano del video, 
-   forzamos a que se mantenga dentro del div */
-  :deep(canvas) {
+  /* Scene dentro del contenedor */
+  :deep(a-scene) {
+    position: absolute !important;
+    inset: 0;
+  }
+
+  /* video de la cámara */
+  :deep(video) {
+    position: absolute !important;
+    inset: 0;
     width: 100% !important;
     height: 100% !important;
-    left: 0 !important;
-    top: 0 !important;
+    object-fit: cover;
+  }
+
+  /* canvas render */
+  :deep(canvas) {
+    position: absolute !important;
+    inset: 0;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 70;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
   }
 </style>
