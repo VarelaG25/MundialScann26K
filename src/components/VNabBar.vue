@@ -3,43 +3,49 @@
     <div class="nav-background"></div>
 
     <div class="nav-content">
-      <Button icon="pi pi-home" class="nav-btn" />
+
+      <Button
+        icon="pi pi-home"
+        class="nav-btn"
+      />
 
       <div class="center-pill">
         <Button
           icon="pi pi-camera"
           rounded
           class="center-btn"
-          @click="scannerOpen = true"
+          @click="emit('openScanner')"
         />
       </div>
 
-      <Button icon="pi pi-flag" class="nav-btn" />
+      <Button
+        icon="pi pi-flag"
+        class="nav-btn"
+      />
+
     </div>
   </nav>
-
-  <VARScanner v-model="scannerOpen" />
 </template>
 
 <script setup lang="ts">
 import Button from 'primevue/button'
-import VARScanner from '@/components/VARScanner.vue'
-import { ref } from 'vue'
 
-const scannerOpen = ref(false)
+const emit = defineEmits(['openScanner'])
 </script>
 
 <style scoped>
 @import "tailwindcss";
 
 .nav-wrapper {
-  @apply fixed bottom-8 left-1/2 -translate-x-1/2 w-[92%] max-w-md z-50;
+  @apply fixed bottom-0 left-1/2 -translate-x-1/2 w-[92%] max-w-md z-50;
 }
 
 .nav-background {
   @apply absolute inset-0 bg-[#1a222e];
+
   mask: radial-gradient(circle 45px at 50% 0%, transparent 45px, black 46px);
   -webkit-mask: radial-gradient(circle 45px at 50% 0%, transparent 45px, black 46px);
+
   border-radius: 30px;
 }
 

@@ -5,16 +5,14 @@ import tailwindcss from '@tailwindcss/vite'
 
 const repoName = 'MundialScann26K'
 
-// https://vite.dev/config/
-export default defineConfig({
-  base: `/${repoName}/`,
-  build: {
-    outDir: 'dist',
-  },
+export default defineConfig(({ command }) => ({
+  base: command === 'serve' ? '/' : `/${repoName}/`,
+
   plugins: [vue(), tailwindcss()],
+
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
-})
+}))
