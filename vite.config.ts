@@ -8,6 +8,9 @@ const repoName = 'MundialScann26K'
 // https://vite.dev/config/
 export default defineConfig({
   base: `/${repoName}/`,
+  build: {
+    outDir: 'dist',
+  },
   plugins: [vue(), tailwindcss()],
   resolve: {
     alias: {
