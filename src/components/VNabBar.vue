@@ -6,24 +6,24 @@
       <Button icon="pi pi-home" class="nav-btn" aria-label="Home" />
 
       <div class="center-pill">
-        <Button icon="pi pi-camera" rounded class="center-btn" @click="showCamera = true" />
+        <Button icon="pi pi-camera" rounded class="center-btn" @click="scannerOpen = true" />
       </div>
 
       <Button icon="pi pi-flag" class="nav-btn" aria-label="Settings" />
     </div>
 
-    <CameraModal v-model="showCamera" @capture="handleImage" />
+    <VARScanner v-model="scannerOpen" @marker="handleCountry" />
   </nav>
 </template>
 
 <script setup lang="ts">
   import Button from 'primevue/button'
-  import CameraModal from '@/components/VCamera.vue'
+  import VARScanner from '@/components/VARScanner.vue'
   import { ref } from 'vue'
 
-  const showCamera = ref(false)
-  const handleImage = (dataUrl: string) => {
-    console.log('Imagen recibida:', dataUrl)
+  const scannerOpen = ref(false)
+  function handleCountry(country: string) {
+    console.log('Bandera detectada:', country)
   }
 </script>
 
