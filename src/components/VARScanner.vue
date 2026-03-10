@@ -5,7 +5,7 @@
       arjs="sourceType: webcam; debugUIEnabled: false; trackingMethod: best;"
       renderer="antialias: true; colorManagement: true; sortObjects: true;"
     >
-      <a-assets>
+      <a-assets timeout="10000">
         <a-asset-item id="eagleModel" src="/models/eagle.glb"></a-asset-item>
       </a-assets>
 
